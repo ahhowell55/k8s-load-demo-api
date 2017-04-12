@@ -4,7 +4,7 @@
 
 # API?
 
-This thing really doesn't have an api but does just one thing.
+This thing does just one thing.
 
 Anything sent in the url is considered a "password" and is hashed with bcrypt. This is set to put some load on the box. Responses should take at least ~1s to generate.
 
