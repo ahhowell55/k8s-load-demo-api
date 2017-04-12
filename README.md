@@ -21,6 +21,11 @@ $ curl http://localhost:8080/hello/i/am/a/password
 {"plain":"hello/i/am/a/password","hashed":"$2a$15$8FEa7wkcEthIv1DdGjM8durXa2b9SrHMNy1FufCRWDZ1dHT5b3p5m"}
 ```
 
+# How to put load on it?
+
+`brew install vegeta`
+
+`echo "GET http://localhost:8001/api/v1/proxy/namespaces/load-demo/services/load-demo-api/" | vegeta attack -duration=300s | tee results.bin | vegeta report`
 
 # How to ship a new release?
 
