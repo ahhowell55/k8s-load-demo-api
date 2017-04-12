@@ -29,11 +29,15 @@ func main() {
 
   logger := loggo.GetLogger("http.PasswordHasher")
   http.Handle("/metrics", promhttp.Handler())
+
+  http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte("OK"))
+  })
+
   http.Handle("/", prometheus.InstrumentHandlerFunc("PasswordHasher", func(w http.ResponseWriter, r *http.Request) {
     password := r.URL.Path[1:]
     logger.Debugf("Request Received for password '%s'", password)
-    // // Hashing the password with the default cost of 10
-    hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost/2)
+    hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost/3)
     if err != nil {
       logger.Errorf("Failed to bcrypt '%s'. Error: %v", password, err.Error())
     }
