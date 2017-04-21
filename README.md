@@ -27,6 +27,8 @@ $ curl http://localhost:8080/hello/i/am/a/password
 
 `echo "GET http://localhost:8001/api/v1/proxy/namespaces/load-demo/services/load-demo-api/" | vegeta attack -duration=300s | tee results.bin | vegeta report`
 
+`echo "GET http://localhost:8001/api/v1/proxy/namespaces/load-demo/services/load-demo-api/$(echo $RANDOM)" | vegeta attack -duration=600s -rate=5 | tee results.bin | vegeta report`
+
 # How to ship a new release?
 
 Publish code to github on master and docker hub's automated build service will publish a docker image @ `jhgaylor/k8s-load-demo-api`. The deployment pulls it from docker's public repository.
